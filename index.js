@@ -214,7 +214,7 @@ pluckPetals()
 
 const add = (val) => result => new Promise(
   (resolve, reject) => {
-    resolve(val + result)
+    resolve(val + result);
   }
 )
 
@@ -233,7 +233,10 @@ add(3)(0)
 
 const delay = time => result => new Promise(
   (resolve, reject) => {
-    setTimeout(() => resolve(result), time)
+    setTimeout(() => {
+      console.info(`delay:`, result);
+      resolve(result)
+    }, time)
   }
 )
 
@@ -246,27 +249,20 @@ function promiseVal (val) {
 function sequentialDemo () {
   promiseVal(10)
     .then(result => {
-      console.log('1:', result);
       return promiseVal(20)
     })
     .then(result => {
-      console.log('2:', result);
       return promiseVal(30)
     })
     .then(result => {
-      console.log('3:', result);
       return promiseVal(40)
     })
     .then(result => {
-      console.log('4:', result);
       return promiseVal(50)
-    })
-    .then(result => {
-      console.log('5:', result);
     })
 }
 
-function promiseAllDemo () {
+function parallelDemo () {
   const allPromises = [
     promiseVal(10),
     promiseVal(20),
