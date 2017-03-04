@@ -243,23 +243,15 @@ const delay = time => result => new Promise(
 // DEMO: Sequential vs. Parralel
 
 function promiseVal (val) {
-  return delay(randFromRange(5000))(val);
+  return delay(randFromRange(3000))(val);
 }
 
 function sequentialDemo () {
   promiseVal(10)
-    .then(result => {
-      return promiseVal(20)
-    })
-    .then(result => {
-      return promiseVal(30)
-    })
-    .then(result => {
-      return promiseVal(40)
-    })
-    .then(result => {
-      return promiseVal(50)
-    })
+    .then(() => promiseVal(20))
+    .then(() => promiseVal(30))
+    .then(() => promiseVal(40))
+    .then(() => promiseVal(50))
 }
 
 function parallelDemo () {
