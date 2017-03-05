@@ -218,6 +218,19 @@ const add = (val) => result => new Promise(
   }
 )
 
+{ // Another way to do this
+  const add = (a, b) => new Promise(
+    (resolve, reject) => {
+      resolve(a + b)
+    }
+  );
+
+  add(3,0)
+    .then(result => add(1, result))
+    .then(result => add(2, result))
+    .then(result => add(6, result))
+}
+
 add(3)(0)
   .then(add(1))
   .then(add(2))
